@@ -17,29 +17,48 @@
 
 ---
 
-## 1. Category Module
+## 1. Login and Logout (Session Handling)
+
+**These test cases focus on session behavior and edge cases beyond basic login and logout.
+
+| ID | Scenario | Test Data | Expected Result | Actual Result | Status |
+|----|----------|-----------|-----------------|-----------------|--------|
+| TC_A01 | Access dashboard in a second tab while logged in on the first | Log in on Tab 1, open Tab 2, go directly to the dashboard URL | Dashboard loads in Tab 2 without asking to log in again, confirming the session is shared across tabs | AS Expected | Passed |
+| TC_A02 | Browser back button after logout | Log in, click logout, then press the browser's back button | Login page stays shown, dashboard does not reappear from cache | As Expected | Passed |
+| TC_A03 | Same account logged in on two different browsers at once | Log in with the same account on Chrome and Edge at the same time | Check whether both sessions stay active, or whether the first one gets logged out | Stay active on both browsers | Passed|
+| TC_A04 | Refresh the page while logged in | Log in, then press F5 on the dashboard | User stays logged in, dashboard reloads with data intact | AS Expected | Passed |
+| TC_A05 | Logout, then directly open a protected API URL | Log out, then open the transactions or dashboard API URL directly in the browser | Access denied or redirected to login, data is not shown |  AS Expected | Passed |
+| TC_A06 | Reuse an old session after logout | Log in, note the session or token if visible in dev tools, log out, then try reloading a protected page | Old session should not work, app should ask to log in again | AS Expected | Passed |
+| TC_A07 | Login with correct username but extra spaces | Username: " afsha ", correct password | Check whether the app trims spaces and logs in, or rejects it | the app trims spaces in username | Passed |
+| TC_A08 | Rapid repeated login attempts with wrong password | Enter wrong password five or six times in a row quickly | Check whether the app has any lockout or rate limiting, or allows unlimited attempts | As Expected | Passed |
+| TC_A09 | Close the browser without logging out, then reopen it | Log in, close the browser tab or window entirely, then reopen the app | Check whether the session is remembered or the user is asked to log in again | As Expected | Passed |
+| TC_A10 | Logout from one tab while another tab is open and active | Log in, open the app in two tabs, click logout in Tab 1, then try an action in Tab 2 | Tab 2 should also lose access and be redirected to login once it tries an action | As Expected | Passed |
+
+---
+
+## 2. Category Module
 
 **Model rules (from `category/models.py`):** `name` max 100 chars, `type` must be Income or Expense, the combination of user + name must be unique, deleting a category cascades to its transactions and budgets.
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|---------------|--------|
-| TC_C01 | Add Income category | Name: "Salary", Type: Income | Category saved and listed | | |
-| TC_C02 | Add Expense category | Name: "Food", Type: Expense | Category saved and listed | | |
-| TC_C03 | Blank name | Name empty | Validation error, not saved | | |
-| TC_C04 | Name at max length | 100 characters | Saved successfully | | |
-| TC_C05 | Name over max length | 101 characters | Validation error, not saved | | |
-| TC_C06 | Invalid type | Type: "Savings" | Validation error (only Income / Expense allowed) | | |
+| TC_C01 | Add Income category | Name: "Salary", Type: Income | Category saved and listed | As Expected | Passed |
+| TC_C02 | Add Expense category | Name: "Food", Type: Expense | Category saved and listed | As Expected | |
+| TC_C03 | Blank name | Name empty | Validation error, not saved | As Expected | |
+| TC_C04 | Name at max length | 100 characters | Saved successfully | As Expected | |
+| TC_C05 | Name over max length | 101 characters | Validation error, not saved | As Expected | |
+| TC_C06 | Invalid type | Type: "Savings" | Validation error (only Income / Expense allowed) | As Expected | |
 | TC_C07 | Missing type | Type not selected | Validation error | | |
-| TC_C08 | Duplicate name, same user | Add "Food" twice | Second one rejected (unique user + name) | | |
-| TC_C09 | Same name, different user | User A and User B both add "Food" | Both allowed | | |
-| TC_C10 | Same name, different type, same user | "Salary" as Income, then "Salary" as Expense | Rejected, because uniqueness is on name only. Confirm the error message is user-friendly | | |
-| TC_C11 | Name differing only by case | "Food" then "food" | Check actual behavior and note whether it is treated as duplicate | | |
-| TC_C12 | Whitespace-only name | Name: "   " | Should be rejected, log a bug if accepted | | |
-| TC_C13 | Delete category that has transactions and budgets | Delete a category used in both | Linked transactions and budgets are also deleted (CASCADE). Check whether the user is warned first | | |
+| TC_C08 | Duplicate name, same user | Add "Food" twice | Second one rejected (unique user + name) | As Expected | |
+| TC_C09 | Same name, different user | User A and User B both add "Food" | Both allowed | As Expected | |
+| TC_C10 | Same name, different type, same user | "Salary" as Income, then "Salary" as Expense | Rejected, because uniqueness is on name only. Confirm the error message is user-friendly | As Expected | |
+| TC_C11 | Name differing only by case | "Food" then "food" | Check actual behavior and note whether it is treated as duplicate | As Expected | |
+| TC_C12 | Whitespace-only name | Name: "   " | Should be rejected, log a bug if accepted | As Expected | |
+| TC_C13 | Delete category that has transactions and budgets | Delete a category used in both | Linked transactions and budgets are also deleted (CASCADE). Check whether the user is warned first | As Expected | |
 
 ---
 
-## 2. Transactions Module
+## 3. Transactions Module
 
 **Model rules (from `transactions/models.py`):** `title` max 200, `amount` max 10 digits with 2 decimals, `payment_mode` one of Cash / UPI / Debit Card / Credit Card / Bank Transfer, `date` required, `description` optional.
 
@@ -66,7 +85,7 @@
 
 ---
 
-## 3. Budget Module
+## 4. Budget Module
 
 **Model rules (from `budget/models.py`):** `amount` max 10 digits with 2 decimals, `month` is a plain text field (max 20 chars) with no date validation, and there is no unique constraint on category + month.
 
@@ -91,7 +110,7 @@
 
 ---
 
-## 4. Accounts (Authentication) Module
+## 5. Accounts (Authentication) Module
 
 **Note:** The accounts app has no custom model, so it uses Django's built-in `User`. Expected results below are standard behavior. Confirm the exact fields on your register and login pages before testing.
 
@@ -109,7 +128,7 @@
 
 ---
 
-## 5. Dashboard Module
+## 6. Dashboard Module
 
 **Note:** The dashboard app has no model of its own. It likely summarizes transactions and budgets. Confirm what it displays (total income, total expense, balance) and adjust these cases.
 
