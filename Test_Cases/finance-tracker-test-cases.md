@@ -159,3 +159,21 @@ These test cases focus on session behavior and edge cases beyond basic login and
 | TC_PR09 | Old password stops working after a change | 1. Change the password successfully from "OldPass@1" to "NewPass@1".<br>2. Log out.<br>3. Try logging in with "OldPass@1".<br>4. Try logging in with "NewPass@1". | Login with the old password fails. Login with the new password succeeds. | It is showing 404 Page Not Found Error | Failed |
 | TC_PR10 | Open the Profile page while logged out | 1. Log out of the app.<br>2. Paste http://localhost:5173/profile into the browser address bar. | The user is redirected to the login page. No profile data is displayed. | As Expected | Passed |
 
+## Bug Reports
+
+| Bug ID | Test Case | Title | Module | Severity | Status |
+|--------|-----------|-------|--------|----------|--------|
+| BUG_01 | TC_DB10 | Dashboard is not responsive on mobile-sized screens | Dashboard | Medium | Open |
+
+### BUG_01: Dashboard is not responsive on mobile-sized screens
+
+| Field | Details |
+|-------|---------|
+| **Related test case** | TC_DB10 |
+| **Environment** | Google Chrome on Windows, http://localhost:5173/dashboard, screen width 375 px (developer tools device mode) |
+| **Steps to reproduce** | 1. Log in and open the Dashboard.<br>2. Press F12 and turn on the device toolbar.<br>3. Set the screen width to 375 px.<br>4. Scroll through the whole page. |
+| **Expected result** | Cards stack vertically, charts fit the screen width, text stays readable, and there is no horizontal scrolling. |
+| **Actual result** | The Dashboard layout does not adjust to smaller screen sizes. |
+| **Severity / Priority** | Medium / Medium |
+| **Evidence** | Screenshot (add a link after uploading) |
+
