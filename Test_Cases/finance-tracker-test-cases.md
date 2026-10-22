@@ -197,7 +197,6 @@ These test cases focus on session behavior and edge cases beyond basic login and
 | **Actual result** | Content is cut off at the right edge of the screen and a horizontal scrollbar appears. |
 | **Severity / Priority** | Medium / Medium |
 | **Status** | Open |
-| **Evidence** | Screenshot (add a link after uploading) |
 
 ### BUG_02: Change password screen shows "Page Not Found" (404)
 
@@ -211,4 +210,3 @@ These test cases focus on session behavior and edge cases beyond basic login and
 | **Actual result** | A "Page Not Found" (404) error is displayed and the change password screen does not load. Users cannot change their password. |
 | **Severity / Priority** | High / High |
 | **Status** | Open |
-| **Evidence** | Screenshot (add a link after uploading) |
