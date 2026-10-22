@@ -9,12 +9,7 @@
 
 | Module | Test Cases | Count |
 |--------|-----------|-------|
-| Accounts (Authentication, Login and Logout) | TC_A01 - TC_A19 | 19 |
-| Category | TC_C01 - TC_C13 | 13 |
-| Transactions | TC_T01 - TC_T18 | 18 |
-| Budget | TC_B01 - TC_B16 | 16 |
-| Dashboard | TC_D01 - TC_D06 | 6 |
-| Cross-Module Security (User Isolation) | TC_S01 - TC_S03 | 3 |
+| Accounts (Authentication, Login and Logout) | TC_A01 - TC_A10 | 10 |
 | Dashboard (Edge Cases) | TC_DB01 - TC_DB10 | 10 |
 | Transactions Page (Edge Cases) | TC_TR01 - TC_TR10 | 10 |
 | Add Transaction (Edge Cases) | TC_AT01 - TC_AT10 | 10 |
@@ -32,12 +27,12 @@
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|-----------------|--------|
-| TC_A01 | Access dashboard in a second tab while logged in on the first | Log in on Tab 1, open Tab 2, go directly to the dashboard URL | Dashboard loads in Tab 2 without asking to log in again, confirming the session is shared across tabs | AS Expected | Passed |
+| TC_A01 | Access dashboard in a second tab while logged in on the first | Log in on Tab 1, open Tab 2, go directly to the dashboard URL | Dashboard loads in Tab 2 without asking to log in again, confirming the session is shared across tabs | As Expected | Passed |
 | TC_A02 | Browser back button after logout | Log in, click logout, then press the browser's back button | Login page stays shown, dashboard does not reappear from cache | As Expected | Passed |
 | TC_A03 | Same account logged in on two different browsers at once | Log in with the same account on Chrome and Edge at the same time | Check whether both sessions stay active, or whether the first one gets logged out | Stay active on both browsers | Passed|
-| TC_A04 | Refresh the page while logged in | Log in, then press F5 on the dashboard | User stays logged in, dashboard reloads with data intact | AS Expected | Passed |
-| TC_A05 | Logout, then directly open a protected API URL | Log out, then open the transactions or dashboard API URL directly in the browser | Access denied or redirected to login, data is not shown |  AS Expected | Passed |
-| TC_A06 | Reuse an old session after logout | Log in, note the session or token if visible in dev tools, log out, then try reloading a protected page | Old session should not work, app should ask to log in again | AS Expected | Passed |
+| TC_A04 | Refresh the page while logged in | Log in, then press F5 on the dashboard | User stays logged in, dashboard reloads with data intact | As Expected | Passed |
+| TC_A05 | Logout, then directly open a protected API URL | Log out, then open the transactions or dashboard API URL directly in the browser | Access denied or redirected to login, data is not shown |  As Expected | Passed |
+| TC_A06 | Reuse an old session after logout | Log in, note the session or token if visible in dev tools, log out, then try reloading a protected page | Old session should not work, app should ask to log in again | As Expected | Passed |
 | TC_A07 | Login with correct username but extra spaces | Username: " afsha ", correct password | Check whether the app trims spaces and logs in, or rejects it | the app trims spaces in username | Passed |
 | TC_A08 | Rapid repeated login attempts with wrong password | Enter wrong password five or six times in a row quickly | Check whether the app has any lockout or rate limiting, or allows unlimited attempts | As Expected | Passed |
 | TC_A09 | Close the browser without logging out, then reopen it | Log in, close the browser tab or window entirely, then reopen the app | Check whether the session is remembered or the user is asked to log in again | As Expected | Passed |
@@ -62,7 +57,7 @@
 
 ---
 
-## 3. Transactions Module (http://localhost:5173/transactions)
+## 3. Transactions Module
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|---------------|--------|
@@ -79,7 +74,7 @@
 
 ---
 
-## 4. Add Transaction Module (http://localhost:5173/add-transaction)
+## 4. Add Transaction Module
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|---------------|--------|
@@ -96,7 +91,7 @@
 
 ---
 
-## 5. Categories Module (http://localhost:5173/categories)
+## 5. Categories Module
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|---------------|--------|
@@ -113,7 +108,7 @@
 
 ---
 
-## 6. Budget Module (http://localhost:5173/budget)
+## 6. Budget Module
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|---------------|--------|
@@ -130,7 +125,7 @@
 
 ---
 
-## 7. Reports Module (http://localhost:5173/reports)
+## 7. Reports Module
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|---------------|--------|
@@ -147,7 +142,7 @@
 
 ---
 
-## 8. Profile Module (http://localhost:5173/profile)
+## 8. Profile Module 
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|---------------|--------|
