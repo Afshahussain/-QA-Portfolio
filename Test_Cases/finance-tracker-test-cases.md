@@ -4,7 +4,7 @@
 - **Tested by:** Afsha Hussain
 - **Test type:** Functional, Boundary, Negative, Data Integrity, Security (user isolation)
 - **Environment:** Local setup, Google Chrome on Windows (frontend: http://localhost:5173, backend: http://127.0.0.1:8000)
-- **Date tested:** October 2026
+- **Date tested:** May 2026
 - **Source code:** [Personal-Finance-Tracker](https://github.com/Afshahussain/Personal-Finance-Tracker)
 
 > **Note:** Test cases were written from the application's models and screens and executed manually on the running app. Each row records the actual result and a Pass or Fail status. Failed cases are reported in the Bug Reports section at the end of this file.
