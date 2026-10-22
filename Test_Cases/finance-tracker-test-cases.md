@@ -1,29 +1,31 @@
 # Personal Finance Tracker - Test Cases
 
-**Application:** Personal Finance Tracker (React.js + Django REST Framework + SQLite)
-**Tested by:** Afsha Hussain
-**Test type:** Functional, Boundary, Negative, Data Integrity, Security (user isolation)
-**Environment:** Local (Chrome, Windows) - update this to match yours
+- **Application:** Personal Finance Tracker (React.js + Django REST Framework + SQLite)
+- **Tested by:** Afsha Hussain
+- **Test type:** Functional, Boundary, Negative, Data Integrity, Security (user isolation)
+- **Environment:** Local setup, Google Chrome on Windows (frontend: http://localhost:5173, backend: http://127.0.0.1:8000)
+- **Date tested:** May 2026
+- **Source code:** [Personal-Finance-Tracker](https://github.com/Afshahussain/Personal-Finance-Tracker)
 
-> **How to use this file:** The "Expected Result" column is based on the model definitions in the code. Run each test on the live app, then fill in **Actual Result** and **Status** (Pass / Fail). Any Fail becomes a bug report.
+> **Note:** Test cases were written from the application's models and screens and executed manually on the running app. Each row records the actual result and a Pass or Fail status. Failed cases are reported in the bug report section.
 
-| Module | Test Cases | Count |
-|--------|-----------|-------|
-| Accounts (Authentication, Login and Logout) | TC_A01 - TC_A10 | 10 |
-| Dashboard | TC_DB01 - TC_DB10 | 10 |
-| Transactions Page | TC_TR01 - TC_TR10 | 10 |
-| Add Transaction | TC_AT01 - TC_AT10 | 10 |
-| Categories | TC_CT01 - TC_CT10 | 10 |
-| Budget | TC_BG01 - TC_BG10 | 10 |
-| Reports | TC_RP01 - TC_RP10 | 10 |
-| Profile | TC_PR01 - TC_PR10 | 10 |
-| **Total** | | **145** |
+| Module                                      | Test Cases        | Count  |
+|---------------------------------------------|-------------------|--------|
+| Accounts (Authentication, Login and Logout) | TC_A01 - TC_A10   | 10     |
+| Dashboard                                   | TC_DB01 - TC_DB10 | 10     |
+| Transactions Page                           | TC_TR01 - TC_TR10 | 10     |
+| Add Transaction                             | TC_AT01 - TC_AT10 | 10     |
+| Categories                                  | TC_CT01 - TC_CT10 | 10     |
+| Budget                                      | TC_BG01 - TC_BG10 | 10     |
+| Reports                                     | TC_RP01 - TC_RP10 | 10     |
+| Profile                                     | TC_PR01 - TC_PR10 | 10     |
+| **Total**                                   |                   | **80** |
 
 ---
 
 ## 1. Login and Logout (Session Handling)
 
-**These test cases focus on session behavior and edge cases beyond basic login and logout.
+These test cases focus on session behavior and edge cases beyond basic login and logout.
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|-----------------|--------|
@@ -79,7 +81,7 @@
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|---------------|--------|
 | TC_AT01 | Maximum allowed amount | 1. Open Add Transaction.<br>2. Title: "Max Test", Amount: 99999999.99, Payment mode: UPI, valid date and category.<br>3. Click Save. | The transaction is saved and appears in the list with amount 99999999.99. | As Expected | Passed |
-| TC_AT02 | Amount above the maximum | 1. Open Add Transaction.<br>2. Enter Amount: 100000000.00 with all other fields valid.<br>3. Click Save. | A validation error is shown for the amount and the transaction is not saved. | As Expected | |
+| TC_AT02 | Amount above the maximum | 1. Open Add Transaction.<br>2. Enter Amount: 100000000.00 with all other fields valid.<br>3. Click Save. | A validation error is shown for the amount and the transaction is not saved. | As Expected | Passed |
 | TC_AT03 | Amount with three decimal places | 1. Open Add Transaction.<br>2. Enter Amount: 10.555 with all other fields valid.<br>3. Click Save. | A validation error such as "No more than 2 decimal places allowed" is shown. The transaction is not saved. | As Expected | Passed |
 | TC_AT04 | Zero and negative amounts | 1. Open Add Transaction.<br>2. Enter Amount: 0 and click Save.<br>3. Enter Amount: -500 and click Save. | Both attempts are rejected with a message that the amount must be greater than zero. Nothing is saved. | As Expected | Passed |
 | TC_AT05 | Title with only spaces | 1. Open Add Transaction.<br>2. Enter Title: "     " (five spaces) with all other fields valid.<br>3. Click Save. | A validation error says the title is required. The transaction is not saved. | As Expected | Passed |
