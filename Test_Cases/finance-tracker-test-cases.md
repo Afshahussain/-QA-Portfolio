@@ -10,13 +10,13 @@
 | Module | Test Cases | Count |
 |--------|-----------|-------|
 | Accounts (Authentication, Login and Logout) | TC_A01 - TC_A10 | 10 |
-| Dashboard (Edge Cases) | TC_DB01 - TC_DB10 | 10 |
-| Transactions Page (Edge Cases) | TC_TR01 - TC_TR10 | 10 |
-| Add Transaction (Edge Cases) | TC_AT01 - TC_AT10 | 10 |
-| Categories (Edge Cases) | TC_CT01 - TC_CT10 | 10 |
-| Budget (Edge Cases) | TC_BG01 - TC_BG10 | 10 |
-| Reports (Edge Cases) | TC_RP01 - TC_RP10 | 10 |
-| Profile (Edge Cases) | TC_PR01 - TC_PR10 | 10 |
+| Dashboard | TC_DB01 - TC_DB10 | 10 |
+| Transactions Page | TC_TR01 - TC_TR10 | 10 |
+| Add Transaction | TC_AT01 - TC_AT10 | 10 |
+| Categories | TC_CT01 - TC_CT10 | 10 |
+| Budget | TC_BG01 - TC_BG10 | 10 |
+| Reports | TC_RP01 - TC_RP10 | 10 |
+| Profile | TC_PR01 - TC_PR10 | 10 |
 | **Total** | | **145** |
 
 ---
@@ -40,7 +40,7 @@
 
 ---
 
-## 2. Dashboard Module (http://localhost:5173/dashboard)
+## 2. Dashboard Module 
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|---------------|--------|
