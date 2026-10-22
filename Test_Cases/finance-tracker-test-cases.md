@@ -161,19 +161,54 @@ These test cases focus on session behavior and edge cases beyond basic login and
 
 ## Bug Reports
 
-| Bug ID | Test Case | Title | Module | Severity | Status |
-|--------|-----------|-------|--------|----------|--------|
-| BUG_01 | TC_DB10 | Dashboard is not responsive on mobile-sized screens | Dashboard | Medium | Open |
+| Bug ID | Test Cases | Title | Module | Severity | Priority | Status |
+|--------|-----------|-------|--------|----------|----------|--------|
+| BUG_01 | TC_DB10 | Dashboard is not responsive on mobile-sized screens | Dashboard | Medium | Medium | Open |
+| BUG_02 | TC_PR08, TC_PR09 | Change password screen shows "Page Not Found" (404) | Profile | High | High | Open |
+
+---
 
 ### BUG_01: Dashboard is not responsive on mobile-sized screens
 
 | Field | Details |
 |-------|---------|
 | **Related test case** | TC_DB10 |
-| **Environment** | Google Chrome on Windows, http://localhost:5173/dashboard, screen width 375 px (developer tools device mode) |
+| **Module** | Dashboard |
+| **Environment** | Google Chrome 155.0.8059.85 on Windows, http://localhost:5173/dashboard, screen width 375 px (developer tools device mode) |
 | **Steps to reproduce** | 1. Log in and open the Dashboard.<br>2. Press F12 and turn on the device toolbar.<br>3. Set the screen width to 375 px.<br>4. Scroll through the whole page. |
 | **Expected result** | Cards stack vertically, charts fit the screen width, text stays readable, and there is no horizontal scrolling. |
-| **Actual result** | The Dashboard layout does not adjust to smaller screen sizes. |
+| **Actual result** | Content is cut off at the right edge of the screen and a horizontal scrollbar appears. |
 | **Severity / Priority** | Medium / Medium |
-| **Evidence** | Screenshot (add a link after uploading) |
+| **Status** | Open |
+---
+
+### BUG_02: Change password screen shows "Page Not Found" (404)
+
+| Field | Details |
+|-------|---------|
+| **Related test cases** | TC_PR08, TC_PR09 |
+| **Module** | Profile |
+| **Environment** | Google Chrome 155.0.8059.85 on Windows, http://localhost:5173/profile |
+| **Steps to reproduce** | 1. Log in and open the Profile page.<br>2. Go to the change password section.<br>3. Try to change the password. |
+| **Expected result** | The change password form opens, and the password can be changed. Mismatched passwords show an error message. |
+| **Actual result** | A "Page Not Found" (404) error is displayed and the change password screen does not load. Users cannot change their password. |
+| **Severity / Priority** | High / High |
+| **Status** | Open |
+
+## Execution Summary
+
+| Item | Details |
+|------|---------|
+| **Date tested** | October 2026 |
+| **Browser** | Google Chrome 155.0.8059.85 (64-bit) |
+| **Operating system** | Windows |
+| **Frontend / Backend** | http://localhost:5173 / http://127.0.0.1:8000 |
+| **Total test cases** | 80 |
+| **Executed** | 76 |
+| **Passed** | 73 |
+| **Failed** | 3 |
+| **Not applicable** | 4 |
+| **Bugs reported** | 2 |
+
+**Result:** 76 executed, 73 passed, 3 failed, 4 not applicable.
 
