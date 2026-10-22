@@ -4,22 +4,39 @@
 - **Tested by:** Afsha Hussain
 - **Test type:** Functional, Boundary, Negative, Data Integrity, Security (user isolation)
 - **Environment:** Local setup, Google Chrome on Windows (frontend: http://localhost:5173, backend: http://127.0.0.1:8000)
-- **Date tested:** May 2026
+- **Date tested:** October 2026
 - **Source code:** [Personal-Finance-Tracker](https://github.com/Afshahussain/Personal-Finance-Tracker)
 
-> **Note:** Test cases were written from the application's models and screens and executed manually on the running app. Each row records the actual result and a Pass or Fail status. Failed cases are reported in the bug report section.
+> **Note:** Test cases were written from the application's models and screens and executed manually on the running app. Each row records the actual result and a Pass or Fail status. Failed cases are reported in the Bug Reports section at the end of this file.
 
-| Module                                      | Test Cases        | Count  |
-|---------------------------------------------|-------------------|--------|
-| Accounts (Authentication, Login and Logout) | TC_A01 - TC_A10   | 10     |
-| Dashboard                                   | TC_DB01 - TC_DB10 | 10     |
-| Transactions Page                           | TC_TR01 - TC_TR10 | 10     |
-| Add Transaction                             | TC_AT01 - TC_AT10 | 10     |
-| Categories                                  | TC_CT01 - TC_CT10 | 10     |
-| Budget                                      | TC_BG01 - TC_BG10 | 10     |
-| Reports                                     | TC_RP01 - TC_RP10 | 10     |
-| Profile                                     | TC_PR01 - TC_PR10 | 10     |
-| **Total**                                   |                   | **80** |
+| Module | Test Cases | Count |
+|--------|-----------|-------|
+| Accounts (Authentication, Login and Logout) | TC_A01 - TC_A10 | 10 |
+| Dashboard | TC_DB01 - TC_DB10 | 10 |
+| Transactions Page | TC_TR01 - TC_TR10 | 10 |
+| Add Transaction | TC_AT01 - TC_AT10 | 10 |
+| Categories | TC_CT01 - TC_CT10 | 10 |
+| Budget | TC_BG01 - TC_BG10 | 10 |
+| Reports | TC_RP01 - TC_RP10 | 10 |
+| Profile | TC_PR01 - TC_PR10 | 10 |
+| **Total** | | **80** |
+
+## Execution Summary
+
+| Item | Details |
+|------|---------|
+| **Date tested** | October 2026 |
+| **Browser** | Google Chrome 155.0.8059.85 (64-bit) |
+| **Operating system** | Windows |
+| **Frontend / Backend** | http://localhost:5173 / http://127.0.0.1:8000 |
+| **Total test cases** | 80 |
+| **Executed** | 76 |
+| **Passed** | 73 |
+| **Failed** | 3 |
+| **Not applicable** | 4 |
+| **Bugs reported** | 2 |
+
+**Result:** 76 executed, 73 passed, 3 failed, 4 not applicable.
 
 ---
 
@@ -28,25 +45,25 @@
 These test cases focus on session behavior and edge cases beyond basic login and logout.
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
-|----|----------|-----------|-----------------|-----------------|--------|
+|----|----------|-----------|-----------------|---------------|--------|
 | TC_A01 | Access dashboard in a second tab while logged in on the first | Log in on Tab 1, open Tab 2, go directly to the dashboard URL | Dashboard loads in Tab 2 without asking to log in again, confirming the session is shared across tabs | As Expected | Passed |
 | TC_A02 | Browser back button after logout | Log in, click logout, then press the browser's back button | Login page stays shown, dashboard does not reappear from cache | As Expected | Passed |
-| TC_A03 | Same account logged in on two different browsers at once | Log in with the same account on Chrome and Edge at the same time | Check whether both sessions stay active, or whether the first one gets logged out | Stay active on both browsers | Passed|
+| TC_A03 | Same account logged in on two different browsers at once | Log in with the same account on Chrome and Edge at the same time | Check whether both sessions stay active, or whether the first one gets logged out | Stay active on both browsers | Passed |
 | TC_A04 | Refresh the page while logged in | Log in, then press F5 on the dashboard | User stays logged in, dashboard reloads with data intact | As Expected | Passed |
-| TC_A05 | Logout, then directly open a protected API URL | Log out, then open the transactions or dashboard API URL directly in the browser | Access denied or redirected to login, data is not shown |  As Expected | Passed |
+| TC_A05 | Logout, then directly open a protected API URL | Log out, then open the transactions or dashboard API URL directly in the browser | Access denied or redirected to login, data is not shown | As Expected | Passed |
 | TC_A06 | Reuse an old session after logout | Log in, note the session or token if visible in dev tools, log out, then try reloading a protected page | Old session should not work, app should ask to log in again | As Expected | Passed |
-| TC_A07 | Login with correct username but extra spaces | Username: " afsha ", correct password | Check whether the app trims spaces and logs in, or rejects it | the app trims spaces in username | Passed |
+| TC_A07 | Login with correct username but extra spaces | Username with a space before and after it, correct password | Check whether the app trims spaces and logs in, or rejects it | The app trims spaces in the username | Passed |
 | TC_A08 | Rapid repeated login attempts with wrong password | Enter wrong password five or six times in a row quickly | Check whether the app has any lockout or rate limiting, or allows unlimited attempts | As Expected | Passed |
 | TC_A09 | Close the browser without logging out, then reopen it | Log in, close the browser tab or window entirely, then reopen the app | Check whether the session is remembered or the user is asked to log in again | As Expected | Passed |
 | TC_A10 | Logout from one tab while another tab is open and active | Log in, open the app in two tabs, click logout in Tab 1, then try an action in Tab 2 | Tab 2 should also lose access and be redirected to login once it tries an action | As Expected | Passed |
 
 ---
 
-## 2. Dashboard Module 
+## 2. Dashboard Module
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|---------------|--------|
-| TC_DB01 | Brand new user opens the dashboard before adding any data | 1. Register a new account.<br>2. Log in.<br>3. Open the Dashboard page without adding any category, transaction or budget. | Total income, total expense and balance all show 0.00. Charts show an empty-state message. No NaN, undefined, blank screen or error appears. | Total income, total expense and balance all show 0.00 | Passed |
+| TC_DB01 | Brand new user opens the dashboard before adding any data | 1. Register a new account.<br>2. Log in.<br>3. Open the Dashboard page without adding any category, transaction or budget. | Total income, total expense and balance all show 0.00. Charts show an empty-state message. No NaN, undefined, blank screen or error appears. | As Expected | Passed |
 | TC_DB02 | Dashboard handles the maximum allowed amount | 1. Add an Income transaction of 99999999.99.<br>2. Add an Expense transaction of 0.01.<br>3. Open the Dashboard. | Income shows 99999999.99, expense shows 0.01, balance shows exactly 99999999.98. No scientific notation, no rounding error, and the cards do not overflow. | As Expected | Passed |
 | TC_DB03 | Decimal addition accuracy | 1. Add two Expense transactions of 0.10 and 0.20 in the same month.<br>2. Open the Dashboard. | Total expense shows exactly 0.30, not 0.30000000000000004 or 0.3000. | As Expected | Passed |
 | TC_DB04 | Expense is higher than income | 1. Add Income of 1000.<br>2. Add Expense of 2500.<br>3. Open the Dashboard. | Balance shows -1500.00 with a minus sign and is visually marked as negative. It is not shown as 0 and does not break the layout. | As Expected | Passed |
@@ -54,8 +71,8 @@ These test cases focus on session behavior and edge cases beyond basic login and
 | TC_DB06 | Dashboard after deleting a category that has transactions | 1. Create category "Travel" and add two Expense transactions under it (300 and 700).<br>2. Note the total expense.<br>3. Delete the "Travel" category.<br>4. Open the Dashboard. | Total expense drops by 1000 because the linked transactions are deleted with the category. Charts no longer show "Travel". | As Expected | Passed |
 | TC_DB07 | Data isolation between two users | 1. Log in as User A and add transactions totalling 5000.<br>2. Log out.<br>3. Log in as User B (a different account with no data).<br>4. Open the Dashboard. | User B sees zero totals and an empty chart. No figure or category from User A is visible. | As Expected | Passed |
 | TC_DB08 | Category with the maximum name length in dashboard charts | 1. Create an Expense category with a 100-character name.<br>2. Add a transaction under it.<br>3. Open the Dashboard. | The category name is wrapped or truncated in the chart legend. Text does not overlap other elements and no horizontal scrollbar appears. | As Expected | Passed |
-| TC_DB09 | Backend stops while the dashboard is open | 1. Open the Dashboard while the backend is running.<br>2. Stop the backend server.<br>3. Press F5 to refresh the Dashboard. | A clear error message such as "Unable to load data" is shown. The page does not stay blank or show an endless loading spinner. | It is showing Network Error | Passed |
-| TC_DB10 | Dashboard on a mobile-sized screen | 1. Open the Dashboard.<br>2. Open browser developer tools and set the screen width to 375 px.<br>3. Scroll through the whole page. | Cards stack vertically, charts fit the screen width, text stays readable, and there is no horizontal scrolling. | Content is cut off at the right edge and a horizontal scrollbar appears | Failed |
+| TC_DB09 | Backend stops while the dashboard is open | 1. Open the Dashboard while the backend is running.<br>2. Stop the backend server.<br>3. Press F5 to refresh the Dashboard. | A clear error message such as "Unable to load data" is shown. The page does not stay blank or show an endless loading spinner. | As Expected | Passed |
+| TC_DB10 | Dashboard on a mobile-sized screen | 1. Open the Dashboard.<br>2. Open browser developer tools and set the screen width to 375 px.<br>3. Scroll through the whole page. | Cards stack vertically, charts fit the screen width, text stays readable, and there is no horizontal scrolling. | Content is cut off at the right edge and a horizontal scrollbar appears. | Failed (BUG_01) |
 
 ---
 
@@ -67,7 +84,7 @@ These test cases focus on session behavior and edge cases beyond basic login and
 | TC_TR02 | Large number of transactions | 1. Add 60 transactions with different titles and amounts.<br>2. Open the Transactions page.<br>3. Scroll or page through the full list. | All 60 transactions are reachable through scrolling or pagination. The page loads without freezing and no transaction is missing or duplicated. | As Expected | Passed |
 | TC_TR03 | Several transactions on the same date | 1. Add three transactions with the same date but different titles.<br>2. Open the Transactions page.<br>3. Refresh the page twice. | All three appear in the same order after every refresh. None is hidden or repeated. | As Expected | Passed |
 | TC_TR04 | Script injection in the title | 1. Add a transaction with title: `<script>alert('hacked')</script>`.<br>2. Open the Transactions page. | The title is displayed as plain text. No popup appears and no script runs. | As Expected | Passed |
-| TC_TR05 | Hindi text and emoji in the title | 1. Add a transaction with title: "किराने का सामान 🛒".<br>2. Open the Transactions page. | The title is saved and displayed exactly as entered. No question marks or broken characters appear. | As Expected |  Passed |
+| TC_TR05 | Hindi text and emoji in the title | 1. Add a transaction with title: "किराने का सामान 🛒".<br>2. Open the Transactions page. | The title is saved and displayed exactly as entered. No question marks or broken characters appear. | As Expected | Passed |
 | TC_TR06 | Delete the same transaction from two tabs | 1. Open the Transactions page in Tab 1 and Tab 2.<br>2. Delete transaction "Groceries" in Tab 1.<br>3. Without refreshing, delete the same transaction in Tab 2. | Tab 2 shows a friendly message such as "Transaction not found" and the list refreshes. The app does not crash or show a blank page. | As Expected | Passed |
 | TC_TR07 | Conflicting edits from two tabs | 1. Open the same transaction in edit mode in two tabs.<br>2. In Tab 1, change the amount to 100 and save.<br>3. In Tab 2, change the amount to 200 and save.<br>4. Refresh the list. | The list shows one transaction with amount 200. No duplicate or corrupted record exists. | As Expected | Passed |
 | TC_TR08 | Open the edit page of a deleted transaction | 1. Note the edit URL of a transaction.<br>2. Delete that transaction.<br>3. Paste the saved edit URL into the browser. | A "Not found" message is shown, or the user is redirected to the list. The page does not stay blank or show a raw server error. | As Expected | Passed |
@@ -84,7 +101,7 @@ These test cases focus on session behavior and edge cases beyond basic login and
 | TC_AT02 | Amount above the maximum | 1. Open Add Transaction.<br>2. Enter Amount: 100000000.00 with all other fields valid.<br>3. Click Save. | A validation error is shown for the amount and the transaction is not saved. | As Expected | Passed |
 | TC_AT03 | Amount with three decimal places | 1. Open Add Transaction.<br>2. Enter Amount: 10.555 with all other fields valid.<br>3. Click Save. | A validation error such as "No more than 2 decimal places allowed" is shown. The transaction is not saved. | As Expected | Passed |
 | TC_AT04 | Zero and negative amounts | 1. Open Add Transaction.<br>2. Enter Amount: 0 and click Save.<br>3. Enter Amount: -500 and click Save. | Both attempts are rejected with a message that the amount must be greater than zero. Nothing is saved. | As Expected | Passed |
-| TC_AT05 | Title with only spaces | 1. Open Add Transaction.<br>2. Enter Title: "     " (five spaces) with all other fields valid.<br>3. Click Save. | A validation error says the title is required. The transaction is not saved. | As Expected | Passed |
+| TC_AT05 | Title with only spaces | 1. Open Add Transaction.<br>2. Enter a title made of five space characters, with all other fields valid.<br>3. Click Save. | A validation error says the title is required. The transaction is not saved. | As Expected | Passed |
 | TC_AT06 | Title exactly at and above the 200-character limit | 1. Open Add Transaction.<br>2. Enter a 200-character title and save.<br>3. Add another transaction with a 201-character title and save. | The 200-character title is saved. The 201-character title is rejected with a length error. | As Expected | Passed |
 | TC_AT07 | Leap year date validation | 1. Open Add Transaction.<br>2. Enter the date 29 Feb 2025 and save.<br>3. Enter the date 29 Feb 2028 and save. | 29 Feb 2025 is rejected as an invalid date. 29 Feb 2028 is saved successfully. | As Expected | Passed |
 | TC_AT08 | Double-click on Save | 1. Fill the Add Transaction form with valid data.<br>2. Double-click the Save button quickly.<br>3. Open the Transactions page. | Only one transaction is created. No duplicate entry exists. | As Expected | Passed |
@@ -97,11 +114,11 @@ These test cases focus on session behavior and edge cases beyond basic login and
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|---------------|--------|
-| TC_CT01 | Category name with only spaces | 1. Open Categories.<br>2. Enter Name: "     " (five spaces), Type: Expense.<br>3. Click Add. | A validation error says the name is required. The category is not created. | As Expected | Passed |
+| TC_CT01 | Category name with only spaces | 1. Open Categories.<br>2. Enter a name made of five space characters, Type: Expense.<br>3. Click Add. | A validation error says the name is required. The category is not created. | As Expected | Passed |
 | TC_CT02 | Name exactly at and above the 100-character limit | 1. Add a category with a 100-character name.<br>2. Add another category with a 101-character name. | The 100-character name is saved. The 101-character name is rejected with a length error. | As Expected | Passed |
 | TC_CT03 | Same name with different letter case | 1. Add category "Food" (Expense).<br>2. Add another category "food" (Expense). | The second category is rejected as a duplicate of "Food". | As Expected | Passed |
 | TC_CT04 | Same name with a different type | 1. Add category "Salary" with type Income.<br>2. Add category "Salary" with type Expense. | The second category is rejected with a message that the category name already exists. | As Expected | Passed |
-| TC_CT05 | Name with extra spaces around it | 1. Add category "Food".<br>2. Add category "  Food  " (spaces before and after). | The second category is rejected as a duplicate because leading and trailing spaces are ignored. | As Expected | Passed |
+| TC_CT05 | Name with extra spaces around it | 1. Add category "Food".<br>2. Add category "Food" again with a space before and after the name. | The second category is rejected as a duplicate because leading and trailing spaces are ignored. | As Expected | Passed |
 | TC_CT06 | Special characters and HTML in the name | 1. Add a category named: `Gifts & <b>Party</b> 🎁`.<br>2. Open the Categories page and the Add Transaction dropdown. | The name is shown as plain text everywhere. The bold tag is not applied and nothing breaks the page. | As Expected | Passed |
 | TC_CT07 | Delete a category that has transactions and a budget | 1. Create category "Rent" with two transactions and one budget.<br>2. Delete the "Rent" category.<br>3. Open Transactions, Budget and Dashboard. | A confirmation message appears before deletion. After deleting, the linked transactions and budget are gone and the Dashboard totals are updated. | As Expected | Passed |
 | TC_CT08 | Change a category type after it has transactions | 1. Create Expense category "Misc" and add an Expense of 400 under it.<br>2. Edit "Misc" and change the type to Income.<br>3. Open the Dashboard. | The Dashboard totals are recalculated consistently with the new type. No transaction is lost or counted twice. | As Expected | Passed |
@@ -139,25 +156,27 @@ These test cases focus on session behavior and edge cases beyond basic login and
 | TC_RP06 | Transactions on the first and last day of the range | 1. Add a transaction on 01 Oct 2026 and another on 31 Oct 2026.<br>2. Open Reports and select 01 Oct 2026 to 31 Oct 2026. | Both boundary-date transactions are included in the report. | As Expected | Passed |
 | TC_RP07 | Category breakdown percentages | 1. Add Expense transactions in four different categories.<br>2. Open Reports and view the category breakdown chart. | The percentages shown add up to 100 percent and each slice matches its category's share of the total. | As Expected | Passed |
 | TC_RP08 | Report with a large amount of data | 1. Add 100 transactions across several months.<br>2. Open Reports and select the full date range. | The report loads within a few seconds without freezing the browser. Totals are correct. | As Expected | Passed |
-| TC_RP09 | Change filters many times quickly | 1. Open Reports.<br>2. Change the date range or month 5 times in quick succession.<br>3. Wait for loading to finish. | The report displayed matches the last selected filter. Data from an earlier selection does not remain on screen. | As Expected |Passed |
+| TC_RP09 | Change filters many times quickly | 1. Open Reports.<br>2. Change the date range or month 5 times in quick succession.<br>3. Wait for loading to finish. | The report displayed matches the last selected filter. Data from an earlier selection does not remain on screen. | As Expected | Passed |
 | TC_RP10 | Deleted transaction disappears from the report | 1. Add an Expense of 2000 and open Reports to note the total.<br>2. Delete that transaction.<br>3. Reopen Reports. | The total expense drops by 2000 and the transaction no longer appears in any chart or table. | As Expected | Passed |
 
 ---
 
-## 8. Profile Module 
+## 8. Profile Module
 
 | ID | Scenario | Test Data | Expected Result | Actual Result | Status |
 |----|----------|-----------|-----------------|---------------|--------|
-| TC_PR01 | Name with only spaces | 1. Open Profile.<br>2. Clear the name field and enter "     " (five spaces).<br>3. Click Save. | A validation error says the name is required. The old name remains unchanged. | As Expected | Passed |
+| TC_PR01 | Name with only spaces | 1. Open Profile.<br>2. Clear the name field and enter five space characters.<br>3. Click Save. | A validation error says the name is required. The old name remains unchanged. | As Expected | Passed |
 | TC_PR02 | Invalid email formats | 1. Open Profile.<br>2. Enter email "abc@" and save.<br>3. Enter email "abc.com" and save.<br>4. Enter email "a b@gmail.com" and save. | All three attempts are rejected with an invalid email message. The saved email does not change. | As Expected | Passed |
 | TC_PR03 | Email already used by another account | 1. Create two accounts, A (a@test.com) and B (b@test.com).<br>2. Log in as B and open Profile.<br>3. Change the email to a@test.com and save. | The update is rejected with a message that the email is already in use. | As Expected | Passed |
-| TC_PR04 | Username already taken | 1. Log in as an account with username "user2".<br>2. Open Profile and change the username to an existing username, "user1".<br>3. Click Save. | The update is rejected with a message that the username already exists. | NA  | Failed |
-| TC_PR05 | Extremely long name | 1. Open Profile.<br>2. Enter a name of 300 characters.<br>3. Click Save. | The update is rejected with a length error, or the text is limited to the maximum allowed. The profile page layout does not break. | NA | Failed |
-| TC_PR06 | Special characters and HTML in the name | 1. Open Profile.<br>2. Enter name: `<b>Afsha</b> <script>alert(1)</script>`.<br>3. Save and reload the page. | The name is displayed as plain text everywhere. No script runs and no formatting is applied. | NA | Failed |
-| TC_PR07 | Change password with the wrong current password | 1. Open Profile and go to change password.<br>2. Enter an incorrect current password and a valid new password.<br>3. Click Save. | The change is rejected with a message that the current password is incorrect. The password stays the same. | NA | Failed |
-| TC_PR08 | New password and confirm password do not match | 1. Open the change password section.<br>2. Enter the correct current password.<br>3. Enter new password "Test@1234" and confirm password "Test@4321".<br>4. Click Save. | The change is rejected with a message that the passwords do not match. | Page Not Found | Failed |
-| TC_PR09 | Old password stops working after a change | 1. Change the password successfully from "OldPass@1" to "NewPass@1".<br>2. Log out.<br>3. Try logging in with "OldPass@1".<br>4. Try logging in with "NewPass@1". | Login with the old password fails. Login with the new password succeeds. | It is showing 404 Page Not Found Error | Failed |
+| TC_PR04 | Username already taken | 1. Log in as an account with username "user2".<br>2. Open Profile and change the username to an existing username, "user1".<br>3. Click Save. | The update is rejected with a message that the username already exists. | Not applicable: the Profile page does not offer this option, so the test could not be performed. | Not Applicable |
+| TC_PR05 | Extremely long name | 1. Open Profile.<br>2. Enter a name of 300 characters.<br>3. Click Save. | The update is rejected with a length error, or the text is limited to the maximum allowed. The profile page layout does not break. | Not applicable: the Profile page does not offer this option, so the test could not be performed. | Not Applicable |
+| TC_PR06 | Special characters and HTML in the name | 1. Open Profile.<br>2. Enter name: `<b>Afsha</b> <script>alert(1)</script>`.<br>3. Save and reload the page. | The name is displayed as plain text everywhere. No script runs and no formatting is applied. | Not applicable: the Profile page does not offer this option, so the test could not be performed. | Not Applicable |
+| TC_PR07 | Change password with the wrong current password | 1. Open Profile and go to change password.<br>2. Enter an incorrect current password and a valid new password.<br>3. Click Save. | The change is rejected with a message that the current password is incorrect. The password stays the same. | Not applicable: the Profile page does not offer this option, so the test could not be performed. | Not Applicable |
+| TC_PR08 | New password and confirm password do not match | 1. Open the change password section.<br>2. Enter the correct current password.<br>3. Enter new password "Test@1234" and confirm password "Test@4321".<br>4. Click Save. | The change is rejected with a message that the passwords do not match. | A "Page Not Found" error is displayed. The change password screen does not load. | Failed (BUG_02) |
+| TC_PR09 | Old password stops working after a change | 1. Change the password successfully from "OldPass@1" to "NewPass@1".<br>2. Log out.<br>3. Try logging in with "OldPass@1".<br>4. Try logging in with "NewPass@1". | Login with the old password fails. Login with the new password succeeds. | A 404 Page Not Found error is displayed when changing the password, so the test could not be completed. | Failed (BUG_02) |
 | TC_PR10 | Open the Profile page while logged out | 1. Log out of the app.<br>2. Paste http://localhost:5173/profile into the browser address bar. | The user is redirected to the login page. No profile data is displayed. | As Expected | Passed |
+
+---
 
 ## Bug Reports
 
@@ -165,8 +184,6 @@ These test cases focus on session behavior and edge cases beyond basic login and
 |--------|-----------|-------|--------|----------|----------|--------|
 | BUG_01 | TC_DB10 | Dashboard is not responsive on mobile-sized screens | Dashboard | Medium | Medium | Open |
 | BUG_02 | TC_PR08, TC_PR09 | Change password screen shows "Page Not Found" (404) | Profile | High | High | Open |
-
----
 
 ### BUG_01: Dashboard is not responsive on mobile-sized screens
 
@@ -180,7 +197,7 @@ These test cases focus on session behavior and edge cases beyond basic login and
 | **Actual result** | Content is cut off at the right edge of the screen and a horizontal scrollbar appears. |
 | **Severity / Priority** | Medium / Medium |
 | **Status** | Open |
----
+| **Evidence** | Screenshot (add a link after uploading) |
 
 ### BUG_02: Change password screen shows "Page Not Found" (404)
 
@@ -194,21 +211,4 @@ These test cases focus on session behavior and edge cases beyond basic login and
 | **Actual result** | A "Page Not Found" (404) error is displayed and the change password screen does not load. Users cannot change their password. |
 | **Severity / Priority** | High / High |
 | **Status** | Open |
-
-## Execution Summary
-
-| Item | Details |
-|------|---------|
-| **Date tested** | October 2026 |
-| **Browser** | Google Chrome 155.0.8059.85 (64-bit) |
-| **Operating system** | Windows |
-| **Frontend / Backend** | http://localhost:5173 / http://127.0.0.1:8000 |
-| **Total test cases** | 80 |
-| **Executed** | 76 |
-| **Passed** | 73 |
-| **Failed** | 3 |
-| **Not applicable** | 4 |
-| **Bugs reported** | 2 |
-
-**Result:** 76 executed, 73 passed, 3 failed, 4 not applicable.
-
+| **Evidence** | Screenshot (add a link after uploading) |
