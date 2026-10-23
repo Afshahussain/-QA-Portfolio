@@ -35,6 +35,7 @@ Accounts, Dashboard, Transactions, Add Transaction, Categories, Budget, Reports,
 | Folder / File | Description |
 |---|---|
 | Test_Cases/finance-tracker-test-cases.md | 80 detailed test cases, execution summary, and bug reports |
+| Test_Plan/finance-tracker-test-plan.md | Test plan covering scope, approach, environment, and entry and exit criteria |
 
 ## Notable Findings
 
