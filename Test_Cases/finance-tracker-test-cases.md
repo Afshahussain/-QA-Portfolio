@@ -25,7 +25,7 @@
 
 | Item | Details |
 |------|---------|
-| **Date tested** | October 2026 |
+| **Date tested** | May 2026 |
 | **Browser** | Google Chrome 155.0.8059.85 (64-bit) |
 | **Operating system** | Windows |
 | **Frontend / Backend** | http://localhost:5173 / http://127.0.0.1:8000 |
